@@ -1,456 +1,275 @@
-<!--
-  ============================================================
-  ABBY SIGLER — PINBOARD PORTFOLIO
-  Squarespace Code Block — v3
-  ============================================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abby Sigler</title>
+  <link rel="stylesheet" href="https://use.typekit.net/REPLACE_ME_TYPEKIT_ID.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  HOW TO USE IN SQUARESPACE:
-  1. Page editor → Add Block → Code → paste this entire file
-  2. Design → Custom CSS → add:
-       .page-section { padding: 0 !important; }
-       main { background: #241f20 !important; }
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  ADOBE FONTS (RL Horizon only — Helvetica is a system font):
-  Replace REPLACE_ME_TYPEKIT_ID with your 7-char kit ID from
-  https://use.typekit.net/XXXXXXX.css
-  Confirm the CSS name for RL Horizon in your kit's "CSS Name"
-  column — currently set to 'rl-horizon', update if different.
+    body {
+      background-color: #1c0a06;
+      background-image: url('images/bg.jpg');
+      background-repeat: repeat;
+      background-size: 600px 600px;
+      padding: 64px 48px 80px;
+      font-family: Helvetica, Arial, sans-serif;
+    }
 
-  IMAGES TO REPLACE (find-replace REPLACE_ME_ in this file):
-    REPLACE_ME_bg.png          → board background PNG
-    REPLACE_ME_paper-bg.png    → scanned notebook paper
-    REPLACE_ME_binder-clip.png → binder clip
-    REPLACE_ME_badge-art.png   → round art badge sticker
-    REPLACE_ME_thumbtack.png   → metal thumbtack
-    REPLACE_ME_muni-button.png → I ❤ MUNI button
-    REPLACE_ME_ladybug.png     → ladybug sticker
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-  BIO PAPER PNG — STRETCHING OPTIONS:
-  The paper uses a real <img> tag (not CSS background) so you
-  have full control. Find .pb-bio-paper in the CSS and change
-  object-fit to one of:
-    cover   → fills the card, crops edges (default)
-    contain → shows full paper with blank areas at edges
-    fill    → stretches to fit exactly, may distort
-  If your scan has a natural ragged/torn edge you want visible,
-  use 'contain' and set a background-color on .pb-bio to match
-  the board background so gaps blend in.
+    /* ── BIO CARD ── */
+    .bio {
+      position: relative;
+      background-color: #fff4d3;
+      background-image: url('images/paper-bg.png');
+      background-size: cover;
+      background-position: center;
+      border-radius: 2px;
+      padding: 52px 40px 52px 70px;
+      transform: rotate(-1.8deg);
+      transform-origin: top center;
+      box-shadow: -4px 8px 32px rgba(0,0,0,0.6), 4px 2px 10px rgba(0,0,0,0.3);
+    }
 
-  COLOR PALETTE:
-    Background dark:  #241f20
-    Purple / text:    #5E004C
-    Cream:            #fff4d3
-    Orange:           #ff8b4c
-    Yellow:           #ffa800
-    Pink:             #ed5e73
-    Mauve:            #D1A3B5
+    /* CSS spiral binding */
+    .bio::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0; width: 50px;
+      border-radius: 2px 0 0 2px;
+      background-color: #ddd5bc;
+      background-image:
+        radial-gradient(circle at 50% 22px,  #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 48px,  #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 74px,  #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 100px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 126px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 152px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 178px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 204px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 230px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 256px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 282px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 308px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 334px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 360px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 386px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 412px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 438px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 464px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 490px, #b8ad98 6px, transparent 6px),
+        radial-gradient(circle at 50% 516px, #b8ad98 6px, transparent 6px);
+    }
 
-  FONTS:
-    RL Horizon  → all headers (Adobe Fonts)
-    Helvetica   → body / paragraph text (system font)
+    .clip {
+      position: absolute;
+      top: -32px; left: 50%;
+      transform: translateX(-50%);
+      width: 68px; z-index: 2;
+    }
+    .clip img { width: 100%; display: block; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4)); }
 
-  STICKER TEMPLATE (cats, photos, etc.):
-  Paste anywhere inside .pb-root, adjust inline styles:
+    .bio h1 {
+      font-family: 'rl-horizon', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: clamp(1.4rem, 2.4vw, 2rem);
+      color: #5E004C;
+      line-height: 1.2;
+      margin-bottom: 22px;
+    }
+    .bio h1 u { text-underline-offset: 4px; }
 
-    <img
-      src="YOUR_IMAGE_URL"
-      alt="description"
-      style="
-        position: absolute;
-        width: 100px;
-        bottom: 40px;
-        left: 60px;
-        transform: rotate(-8deg);
-        z-index: 10;
-        filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.4));
-        pointer-events: none;
-      "
-    >
-  ============================================================
--->
+    .bio p {
+      font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+      color: #5E004C;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .bio p:last-child { margin-bottom: 0; }
 
-<!-- ADOBE FONTS — RL Horizon only -->
-<link rel="stylesheet" href="https://use.typekit.net/REPLACE_ME_TYPEKIT_ID.css">
+    .drop {
+      font-weight: 700;
+      font-size: 1.6em;
+      color: #5E004C;
+      float: left;
+      line-height: 0.85;
+      margin-right: 2px;
+      margin-top: 3px;
+    }
 
-<style>
-  :root {
-    --dark:   #241f20;
-    --purple: #5E004C;
-    --cream:  #fff4d3;
-    --orange: #ff8b4c;
-    --yellow: #ffa800;
-    --pink:   #ed5e73;
-    --mauve:  #D1A3B5;
-  }
+    /* ── RIGHT COLUMN ── */
+    .right {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      min-width: 0;
+    }
 
-  .pb-root *, .pb-root *::before, .pb-root *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+    /* ── SHARED CARD ── */
+    .card {
+      border-radius: 4px;
+      position: relative;
+      box-shadow: 3px 6px 20px rgba(0,0,0,0.5);
+    }
 
-  /* ── BOARD ── */
-  .pb-root {
-    background-color: var(--dark);
-    background-image: url('REPLACE_ME_bg.png');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    width: 100%;
-    padding: 64px 48px 88px;
-    position: relative;
-    overflow: hidden;
-  }
+    .card h2 {
+      font-family: 'rl-horizon', serif;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 2vw, 1.65rem);
+      color: #5E004C;
+      margin-bottom: 18px;
+      line-height: 1;
+    }
 
-  .pb-board {
-    max-width: 1160px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 48px;
-    align-items: start;
-  }
+    /* ── WRITING ── */
+    .writing {
+      background: #ff8b4c;
+      padding: 56px 32px 32px;
+    }
+    .writing ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .writing a {
+      font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+      font-weight: 600;
+      color: #5E004C;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      line-height: 1.4;
+    }
+    .writing a:hover { opacity: 0.65; }
 
-  /* ════════════════════════════════
-     BIO CARD
-  ════════════════════════════════ */
-  .pb-bio {
-    position: relative;
-    transform: rotate(-1.8deg);
-    transform-origin: center top;
-    /* Fallback color while PNG loads, and visible on 'contain' gaps */
-    background-color: var(--cream);
-    border-radius: 2px;
-    padding: 52px 44px 56px 72px;
-    overflow: hidden; /* keeps paper img inside rounded corners */
-    box-shadow:
-      -4px 8px 32px rgba(0,0,0,0.65),
-       4px 2px 10px rgba(0,0,0,0.35);
-  }
+    .badge {
+      position: absolute;
+      top: -36px; left: 50%;
+      transform: translateX(-50%);
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: #5BBFCF url('images/badge-art.png') center/cover;
+      box-shadow: 2px 4px 10px rgba(0,0,0,0.4);
+    }
 
-  /*
-    Paper background image.
-    Change object-fit to control stretching — see header comments.
-    Options: cover | contain | fill
-  */
-  .pb-bio-paper {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    z-index: 0;
-    pointer-events: none;
-    border-radius: 2px;
-  }
+    .tack {
+      position: absolute;
+      right: 14px; top: 50%;
+      transform: translateY(-50%);
+      width: 40px; height: 40px;
+      background: url('images/thumbtack.png') center/contain no-repeat;
+      filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.5));
+    }
 
-  /* Everything inside the bio sits above the paper img */
-  .pb-bio-binding,
-  .pb-bio-clip,
-  .pb-bio h1,
-  .pb-bio p {
-    position: relative;
-    z-index: 1;
-  }
+    /* ── BOTTOM ROW ── */
+    .bottom {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
 
-  /* CSS spiral binding — fallback if paper PNG doesn't include it.
-     Set display: none once your scanned paper has its own binding. */
-  .pb-bio-binding {
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 52px;
-    border-radius: 2px 0 0 2px;
-    background-color: #ddd5bc;
-    background-image:
-      radial-gradient(circle at 50% 20px,  #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 46px,  #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 72px,  #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 98px,  #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 124px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 150px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 176px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 202px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 228px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 254px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 280px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 306px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 332px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 358px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 384px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 410px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 436px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 462px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 488px, #b8ad98 7px, transparent 7px),
-      radial-gradient(circle at 50% 514px, #b8ad98 7px, transparent 7px);
-    z-index: 1;
-    pointer-events: none;
-  }
+    /* ── PROJECTS ── */
+    .projects {
+      background: #ffa800;
+      padding: 56px 28px 32px;
+    }
+    .projects ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .projects li {
+      font-size: clamp(0.85rem, 1.2vw, 0.93rem);
+      color: #241f20;
+      line-height: 1.45;
+      padding-left: 16px;
+      position: relative;
+    }
+    .projects li::before { content: '•'; position: absolute; left: 0; color: #5E004C; font-weight: 700; }
+    .projects li s { text-decoration: line-through; }
+    .projects a { color: #241f20; text-decoration: underline; text-underline-offset: 2px; }
 
-  /* Binder clip */
-  .pb-bio-clip {
-    position: absolute;
-    top: -34px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70px;
-    z-index: 3;
-  }
-  .pb-bio-clip img {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.45));
-  }
+    .muni {
+      position: absolute;
+      top: -38px; left: 50%;
+      transform: translateX(-50%);
+      width: 76px; height: 76px;
+      border-radius: 50%;
+      background: #cc0000 url('images/muni-button.png') center/cover;
+      box-shadow: 2px 4px 10px rgba(0,0,0,0.4);
+    }
 
-  /* Bio headline — RL Horizon */
-  .pb-bio h1 {
-    font-family: 'rl-horizon', serif;
-    font-weight: 700;
-    font-style: italic;
-    font-size: clamp(1.55rem, 2.8vw, 2.2rem);
-    color: var(--purple);
-    line-height: 1.18;
-    margin-bottom: 24px;
-    letter-spacing: -0.01em;
-  }
-  .pb-bio h1 .underline {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
-  }
+    /* ── CONTACT ── */
+    a.contact-link { text-decoration: none; display: block; }
 
-  /* Bio body — Helvetica */
-  .pb-bio p {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: clamp(0.88rem, 1.35vw, 0.98rem);
-    color: var(--purple);
-    line-height: 1.7;
-    margin-bottom: 16px;
-  }
-  .pb-bio p:last-child { margin-bottom: 0; }
+    .contact {
+      background: #ed5e73;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 140px;
+      padding: 24px 16px;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+    .contact:hover { box-shadow: 4px 8px 28px rgba(0,0,0,0.6); }
 
-  .pb-bio .drop-cap {
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    font-size: 1.7em;
-    color: var(--purple);
-    float: left;
-    line-height: 0.82;
-    margin-right: 2px;
-    margin-top: 4px;
-  }
+    .contact h2 {
+      font-family: 'rl-horizon', serif;
+      font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+      color: #5E004C;
+      text-align: center;
+      margin: 0;
+    }
 
-  /* ════════════════════════════════
-     RIGHT COLUMN
-  ════════════════════════════════ */
-  .pb-right {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
+    .ladybug {
+      position: absolute;
+      top: -20px; right: 10px;
+      width: 48px; height: 48px;
+      background: url('images/ladybug.png') center/contain no-repeat;
+      filter: drop-shadow(1px 2px 4px rgba(0,0,0,0.4));
+    }
 
-  .pb-card {
-    position: relative;
-    border-radius: 5px;
-    box-shadow:
-       3px 6px 24px rgba(0,0,0,0.55),
-      -1px 1px 6px rgba(0,0,0,0.2);
-  }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 820px) {
+      body { padding: 48px 24px 64px; }
+      .grid { grid-template-columns: 1fr; gap: 48px; }
+      .bio { transform: rotate(-1deg); max-width: 540px; margin: 0 auto; }
+      .bottom { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+    }
 
-  /* Card headers — RL Horizon */
-  .pb-card h2 {
-    font-family: 'rl-horizon', serif;
-    font-weight: 700;
-    font-size: clamp(1.3rem, 2.2vw, 1.75rem);
-    color: var(--purple);
-    line-height: 1.05;
-    margin-bottom: 20px;
-    letter-spacing: -0.01em;
-  }
+    @media (max-width: 540px) {
+      body { padding: 36px 16px 56px; }
+      .bio { padding: 44px 24px 44px 54px; }
+      .bottom { grid-template-columns: 1fr; gap: 16px; }
+      .contact { min-height: 100px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
 
-  /* ── SELECTED WRITING (orange) ── */
-  .pb-writing {
-    background-color: var(--orange);
-    transform: rotate(0.5deg);
-    transform-origin: top right;
-    padding: 60px 36px 36px;
-  }
-  .pb-writing ul { list-style: none; display: flex; flex-direction: column; gap: 18px; }
-  .pb-writing ul li a {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: clamp(0.88rem, 1.3vw, 0.97rem);
-    font-weight: 600;
-    color: var(--purple);
-    text-decoration: underline;
-    text-decoration-thickness: 1.5px;
-    text-underline-offset: 3px;
-    line-height: 1.4;
-    transition: opacity 0.15s;
-  }
-  .pb-writing ul li a:hover { opacity: 0.6; }
-
-  /* Art badge sticker */
-  .pb-badge {
-    position: absolute;
-    top: -40px; left: 50%;
-    transform: translateX(-50%);
-    width: 78px; height: 78px;
-    border-radius: 50%;
-    background-image: url('REPLACE_ME_badge-art.png');
-    background-size: cover;
-    background-color: #5BBFCF; /* placeholder */
-    box-shadow: 2px 4px 12px rgba(0,0,0,0.45);
-  }
-
-  /* Metal thumbtack */
-  .pb-tack {
-    position: absolute;
-    right: -20px; top: 48%;
-    transform: translateY(-50%);
-    width: 48px; height: 48px;
-    background-image: url('REPLACE_ME_thumbtack.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.5));
-  }
-
-  /* ── BOTTOM ROW ── */
-  .pb-bottom {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 24px;
-    align-items: start;
-  }
-
-  /* ── OTHER PROJECTS (yellow) ── */
-  .pb-projects {
-    background-color: var(--yellow);
-    transform: rotate(-0.7deg);
-    padding: 60px 32px 36px;
-  }
-  .pb-projects ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
-  .pb-projects ul li {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: clamp(0.88rem, 1.3vw, 0.95rem);
-    color: var(--dark);
-    line-height: 1.45;
-    padding-left: 18px;
-    position: relative;
-  }
-  .pb-projects ul li::before { content: '•'; position: absolute; left: 0; font-weight: 700; color: var(--purple); }
-  .pb-projects ul li s { text-decoration: line-through; text-decoration-thickness: 1.5px; }
-  .pb-projects ul li a { color: var(--dark); text-decoration: underline; text-underline-offset: 2px; transition: opacity 0.15s; }
-  .pb-projects ul li a:hover { opacity: 0.6; }
-
-  /* MUNI button sticker */
-  .pb-muni {
-    position: absolute;
-    top: -42px; left: 50%;
-    transform: translateX(-50%);
-    width: 80px; height: 80px;
-    border-radius: 50%;
-    background-image: url('REPLACE_ME_muni-button.png');
-    background-size: cover;
-    background-color: #cc0000; /* placeholder */
-    box-shadow: 2px 4px 12px rgba(0,0,0,0.45);
-  }
-
-  /* ── CONTACT (pink) ── */
-  .pb-contact-wrap { text-decoration: none; display: block; }
-
-  .pb-contact {
-    background-color: var(--pink);
-    transform: rotate(1.4deg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 148px;
-    padding: 28px 20px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .pb-contact:hover {
-    transform: rotate(1.4deg) scale(1.04);
-    box-shadow: 6px 10px 32px rgba(0,0,0,0.6);
-  }
-  .pb-contact h2 {
-    font-family: 'rl-horizon', serif;
-    font-size: clamp(1.3rem, 2.1vw, 1.65rem);
-    color: var(--purple);
-    text-align: center;
-    margin-bottom: 0;
-  }
-
-  /* Ladybug sticker */
-  .pb-ladybug {
-    position: absolute;
-    top: -22px; right: -10px;
-    width: 56px; height: 56px;
-    background-image: url('REPLACE_ME_ladybug.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transform: rotate(14deg);
-    filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.4));
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 860px) {
-    .pb-root { padding: 56px 28px 72px; }
-    .pb-board { grid-template-columns: 1fr; gap: 52px; }
-    .pb-bio { transform: rotate(-1deg); max-width: 580px; margin: 0 auto; }
-    .pb-bottom { grid-template-columns: 3fr 2fr; }
-  }
-
-  @media (max-width: 580px) {
-    .pb-root { padding: 44px 18px 64px; }
-    .pb-bio { padding: 44px 28px 48px 56px; transform: rotate(-0.6deg); }
-    .pb-bio h1 { font-size: 1.45rem; }
-    .pb-bottom { grid-template-columns: 1fr; gap: 20px; }
-    .pb-contact { min-height: 110px; }
-  }
-</style>
-
-<div class="pb-root">
-  <div class="pb-board">
-
-    <!-- ══ BIO CARD ══ -->
-    <div class="pb-bio">
-
-      <!-- Paper background — real img tag for full stretching control -->
-      <img
-        class="pb-bio-paper"
-        src="REPLACE_ME_paper-bg.png"
-        alt=""
-        aria-hidden="true"
-      >
-
-      <!-- CSS spiral binding fallback (add display:none once your paper PNG has its own) -->
-      <div class="pb-bio-binding" aria-hidden="true"></div>
-
-      <!-- Binder clip PNG -->
-      <div class="pb-bio-clip">
-        <img src="REPLACE_ME_binder-clip.png" alt="" aria-hidden="true">
-      </div>
-
-      <h1>Abby Sigler is a freelance journalist and Managing Editor of <span class="underline">The Guardsman</span>.</h1>
-
-      <p><span class="drop-cap">B</span>ased in San Francisco, she reports on community, culture, and technology, with an interest in how these forces intersect in everyday life. Her investigative reporting has received awards from the San Francisco Press Club and the NorCal Society of Professional Journalists.</p>
-
+    <!-- BIO -->
+    <div class="bio">
+      <div class="clip"><img src="images/binder-clip.png" alt="" aria-hidden="true"></div>
+      <h1>Abby Sigler is a freelance journalist and Managing Editor of <u>The Guardsman</u>.</h1>
+      <p><span class="drop">B</span>ased in San Francisco, she reports on community, culture, and technology, with an interest in how these forces intersect in everyday life. Her investigative reporting has received awards from the San Francisco Press Club and the NorCal Society of Professional Journalists.</p>
       <p>Abby graduated from UC San Diego with a degree in Cognitive Science and has completed a certificate in Data Journalism at City College. At The Guardsman, she has covered education policy, student life, and San Francisco's shifting cultural landscape. She approaches journalism as both documentation and critique—an effort to reflect life in the city while examining the structures that shape it.</p>
     </div>
 
-    <!-- ══ RIGHT COLUMN ══ -->
-    <div class="pb-right">
+    <!-- RIGHT -->
+    <div class="right">
 
-      <!-- SELECTED WRITING -->
-      <div class="pb-card pb-writing">
-        <div class="pb-badge" role="img" aria-label="decorative art badge"></div>
-        <div class="pb-tack" aria-hidden="true"></div>
+      <div class="card writing">
+        <div class="badge"></div>
+        <div class="tack"></div>
         <h2>Selected Writing</h2>
         <ul>
           <li><a href="#">Student Films Captivate Audiences At Festival of the Moving Image</a></li>
@@ -459,12 +278,10 @@
         </ul>
       </div>
 
-      <!-- BOTTOM ROW -->
-      <div class="pb-bottom">
+      <div class="bottom">
 
-        <!-- OTHER PROJECTS -->
-        <div class="pb-card pb-projects">
-          <div class="pb-muni" role="img" aria-label="I love Muni button"></div>
+        <div class="card projects">
+          <div class="muni"></div>
           <h2>Other Projects</h2>
           <ul>
             <li>In The Park — multimedia exploration of communities in Golden Gate Park</li>
@@ -472,23 +289,16 @@
           </ul>
         </div>
 
-        <!-- CONTACT -->
-        <a href="mailto:your@email.com" class="pb-contact-wrap">
-          <div class="pb-card pb-contact">
-            <div class="pb-ladybug" aria-hidden="true"></div>
+        <a href="mailto:your@email.com" class="contact-link">
+          <div class="card contact">
+            <div class="ladybug"></div>
             <h2>Contact<br>Me!</h2>
           </div>
         </a>
 
-      </div><!-- /pb-bottom -->
+      </div>
+    </div>
 
-      <!--
-        ══ ADD STICKERS HERE ══
-        See template in the file header comments.
-        Good spots: bottom corners of the board, overlapping card edges,
-        hanging off the bio card. Use z-index: 10+ to float above cards.
-      -->
-
-    </div><!-- /pb-right -->
-  </div><!-- /pb-board -->
-</div><!-- /pb-root -->
+  </div>
+</body>
+</html>
