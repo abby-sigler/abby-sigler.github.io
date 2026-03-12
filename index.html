@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abby Sigler</title>
-  <link rel="stylesheet" href="https://use.typekit.net/REPLACE_ME_TYPEKIT_ID.css">
+  <link rel="stylesheet" href="https://use.typekit.net/eax3qjh.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -26,68 +26,36 @@
     .grid {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 40px;
+      gap: 36px;
       max-width: 1200px;
       margin: 0 auto;
+    }
+
+    /* ── LEFT COLUMN ── */
+    .left {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
     }
 
     /* ── BIO CARD ── */
     .bio {
       position: relative;
-      background-color: #fff4d3;
-      background-image: url('images/paper-bg.png');
-      background-size: cover;
-      background-position: center;
-      border-radius: 2px;
-      padding: 52px 40px 52px 70px;
-      transform: rotate(-1.8deg);
+      background-color: transparent;
+      background-image: url('images/bio.png');
+      width: 530px;
+      min-height: 765px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      padding: 145px 40px 52px 100px;
+      transform: rotate(-3deg);
       transform-origin: top center;
-      box-shadow: -4px 8px 32px rgba(0,0,0,0.6), 4px 2px 10px rgba(0,0,0,0.3);
     }
-
-    /* CSS spiral binding */
-    .bio::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0; width: 50px;
-      border-radius: 2px 0 0 2px;
-      background-color: #ddd5bc;
-      background-image:
-        radial-gradient(circle at 50% 22px,  #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 48px,  #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 74px,  #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 100px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 126px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 152px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 178px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 204px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 230px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 256px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 282px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 308px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 334px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 360px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 386px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 412px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 438px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 464px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 490px, #b8ad98 6px, transparent 6px),
-        radial-gradient(circle at 50% 516px, #b8ad98 6px, transparent 6px);
-    }
-
-    .clip {
-      position: absolute;
-      top: -32px; left: 50%;
-      transform: translateX(-50%);
-      width: 68px; z-index: 2;
-    }
-    .clip img { width: 100%; display: block; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4)); }
 
     .bio h1 {
       font-family: 'rl-horizon', serif;
       font-weight: 700;
-      font-style: italic;
-      font-size: clamp(1.4rem, 2.4vw, 2rem);
+      font-size: clamp(1.6rem, 2.8vw, 2rem);
       color: #5E004C;
       line-height: 1.2;
       margin-bottom: 22px;
@@ -95,28 +63,29 @@
     .bio h1 u { text-underline-offset: 4px; }
 
     .bio p {
-      font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      font-weight: 400;
       color: #5E004C;
-      line-height: 1.7;
+      line-height: 1.3;
       margin-bottom: 14px;
     }
     .bio p:last-child { margin-bottom: 0; }
 
     .drop {
+      font-family: 'rl-horizon', serif;
       font-weight: 700;
-      font-size: 1.6em;
+      font-size: clamp(1.4rem, 2vw, 1.8rem);
       color: #5E004C;
-      float: left;
-      line-height: 0.85;
-      margin-right: 2px;
-      margin-top: 3px;
+      line-height: 1;
     }
 
     /* ── RIGHT COLUMN ── */
     .right {
+      align-items: center;
       display: flex;
       flex-direction: column;
-      gap: 36px;
+      gap: 64px;
       min-width: 0;
     }
 
@@ -130,7 +99,7 @@
     .card h2 {
       font-family: 'rl-horizon', serif;
       font-weight: 700;
-      font-size: clamp(1.2rem, 2vw, 1.65rem);
+      font-size: clamp(1.6rem, 2.8vw, 2rem);
       color: #5E004C;
       margin-bottom: 18px;
       line-height: 1;
@@ -138,13 +107,20 @@
 
     /* ── WRITING ── */
     .writing {
-      background: #ff8b4c;
+      width: 560px;
+      min-height: 380px;
+      transform: rotate(2deg);
+      margin-top: 60px;
+      background: #ffa800;
       padding: 56px 32px 32px;
+      
     }
-    .writing ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .writing ul { list-style: disc; display: flex; flex-direction: column; gap: 16px; padding-left: 16px; }
+    .writing li::marker { color: #5E004C; }
     .writing a {
-      font-size: clamp(0.85rem, 1.2vw, 0.95rem);
-      font-weight: 600;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      font-weight: 400;
       color: #5E004C;
       text-decoration: underline;
       text-underline-offset: 3px;
@@ -152,69 +128,25 @@
     }
     .writing a:hover { opacity: 0.65; }
 
-    .badge {
+    .angel {
       position: absolute;
-      top: -36px; left: 50%;
+      top: -40%; left: 40%;
       transform: translateX(-50%);
-      width: 72px; height: 72px;
+      width: 300px; height: 300px;
       border-radius: 50%;
-      background: #5BBFCF url('images/badge-art.png') center/cover;
-      box-shadow: 2px 4px 10px rgba(0,0,0,0.4);
-    }
-
-    .tack {
-      position: absolute;
-      right: 14px; top: 50%;
-      transform: translateY(-50%);
-      width: 40px; height: 40px;
-      background: url('images/thumbtack.png') center/contain no-repeat;
-      filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.5));
-    }
-
-    /* ── BOTTOM ROW ── */
-    .bottom {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-      gap: 20px;
-      align-items: start;
-    }
-
-    /* ── PROJECTS ── */
-    .projects {
-      background: #ffa800;
-      padding: 56px 28px 32px;
-    }
-    .projects ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-    .projects li {
-      font-size: clamp(0.85rem, 1.2vw, 0.93rem);
-      color: #241f20;
-      line-height: 1.45;
-      padding-left: 16px;
-      position: relative;
-    }
-    .projects li::before { content: '•'; position: absolute; left: 0; color: #5E004C; font-weight: 700; }
-    .projects li s { text-decoration: line-through; }
-    .projects a { color: #241f20; text-decoration: underline; text-underline-offset: 2px; }
-
-    .muni {
-      position: absolute;
-      top: -38px; left: 50%;
-      transform: translateX(-50%);
-      width: 76px; height: 76px;
-      border-radius: 50%;
-      background: #cc0000 url('images/muni-button.png') center/cover;
-      box-shadow: 2px 4px 10px rgba(0,0,0,0.4);
+      background: url('images/angel.png') center/cover;
     }
 
     /* ── CONTACT ── */
-    a.contact-link { text-decoration: none; display: block; }
+    a.contact-link { text-decoration: none; display: block; transform: rotate(-1.5deg); display: block; width: fit-content;}
 
     .contact {
+      width: 190px;
+      min-height: 136px;
       background: #ed5e73;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 140px;
       padding: 24px 16px;
       cursor: pointer;
       transition: box-shadow 0.2s;
@@ -223,7 +155,7 @@
 
     .contact h2 {
       font-family: 'rl-horizon', serif;
-      font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+      font-size: clamp(1.6rem, 2.8vw, 2.5rem);
       color: #5E004C;
       text-align: center;
       margin: 0;
@@ -231,10 +163,62 @@
 
     .ladybug {
       position: absolute;
-      top: -20px; right: 10px;
-      width: 48px; height: 48px;
-      background: url('images/ladybug.png') center/contain no-repeat;
-      filter: drop-shadow(1px 2px 4px rgba(0,0,0,0.4));
+      top: -60%; right: 10px;
+      width: 150px; height: 150px;
+      background: url('images/bug.png') center/contain no-repeat;
+    }
+
+    /* ── AWARDS ── */
+    .awards {
+      width: 460px;
+      min-height: 450px;
+      transform: rotate(-2.5deg);
+      background: #D1A3B5;
+      padding: 28px 24px 28px;
+    }
+    .awards ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+    .awards li {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      color: #5E004C;
+      line-height: 1.45;
+    }
+    .awards li strong { font-weight: 700; }
+
+    .pan {
+      position: absolute;
+      right: -10%; top: -20%;
+      width: 200px; height: 200px;
+      background: url('images/pan.png') center/contain no-repeat;
+    }
+
+    /* ── PROJECTS ── */
+    .projects {
+      margin-left: 120px;
+      width: 430px;
+      min-height: 275px;
+      transform: rotate(1.5deg);
+      background: #ff8b4c;
+      padding: 56px 28px 32px;
+    }
+    .projects ul { list-style: disc; display: flex; flex-direction: column; gap: 16px; padding-left: 16px; }
+    .projects li::marker { color: #5E004C; }
+    .projects li {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      font-weight: 400;
+      color: #5E004C;
+      line-height: 1.45;
+    }
+    .projects li s { text-decoration: line-through; }
+    .projects a { color: #241f20; text-decoration: underline; text-underline-offset: 2px; }
+
+    .muni {
+      position: absolute;
+      top: -50%; left: 30%;
+      transform: translateX(-50%);
+      width: 300px; height: 300px;
+      background: url('images/muni.png') center/cover;
     }
 
     /* ── RESPONSIVE ── */
@@ -242,13 +226,11 @@
       body { padding: 48px 24px 64px; }
       .grid { grid-template-columns: 1fr; gap: 48px; }
       .bio { transform: rotate(-1deg); max-width: 540px; margin: 0 auto; }
-      .bottom { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
     }
 
     @media (max-width: 540px) {
       body { padding: 36px 16px 56px; }
       .bio { padding: 44px 24px 44px 54px; }
-      .bottom { grid-template-columns: 1fr; gap: 16px; }
       .contact { min-height: 100px; }
     }
   </style>
@@ -256,47 +238,65 @@
 <body>
   <div class="grid">
 
-    <!-- BIO -->
-    <div class="bio">
-      <div class="clip"><img src="images/binder-clip.png" alt="" aria-hidden="true"></div>
-      <h1>Abby Sigler is a freelance journalist and Managing Editor of <u>The Guardsman</u>.</h1>
-      <p><span class="drop">B</span>ased in San Francisco, she reports on community, culture, and technology, with an interest in how these forces intersect in everyday life. Her investigative reporting has received awards from the San Francisco Press Club and the NorCal Society of Professional Journalists.</p>
-      <p>Abby graduated from UC San Diego with a degree in Cognitive Science and has completed a certificate in Data Journalism at City College. At The Guardsman, she has covered education policy, student life, and San Francisco's shifting cultural landscape. She approaches journalism as both documentation and critique—an effort to reflect life in the city while examining the structures that shape it.</p>
+    <!-- LEFT COLUMN -->
+    <div class="left">
+
+      <!-- BIO -->
+      <div class="bio">
+        <h1>I'm Abby Sigler, a freelance journalist and the Managing Editor of <u>The Guardsman</u>.</h1>
+        <p><span class="drop">B</span>ased in San Francisco, she reports on community, culture, and technology, with an interest in how these forces intersect in everyday life. Her investigative reporting has received awards from the San Francisco Press Club and the NorCal Society of Professional Journalists.</p>
+        <p>Abby graduated from UC San Diego with a degree in Cognitive Science and has completed a certificate in Data Journalism at City College. At The Guardsman, she has covered education policy, student life, and San Francisco's shifting cultural landscape. She approaches journalism as both documentation and critique—an effort to reflect life in the city while examining the structures that shape it.</p>
+      </div>
+
+      <!-- OTHER PROJECTS -->
+      <div class="card projects">
+        <div class="muni"></div>
+        <h2>Other Projects</h2>
+        <ul>
+          <li>In The Park — multimedia exploration of communities in Golden Gate Park</li>
+          <li>abby normal — <s>newsletter</s> <s>blog</s> column hosted on Substack</li>
+        </ul>
+      </div>
+
     </div>
 
-    <!-- RIGHT -->
+    <!-- RIGHT COLUMN -->
     <div class="right">
 
+      <!-- SELECTED WRITING -->
       <div class="card writing">
-        <div class="badge"></div>
-        <div class="tack"></div>
+        <div class="angel"></div>
         <h2>Selected Writing</h2>
         <ul>
           <li><a href="#">Student Films Captivate Audiences At Festival of the Moving Image</a></li>
           <li><a href="#">CCSF's Promise to Bayview Caught in Legal Purgatory</a></li>
           <li><a href="#">Steward of the Diego Rivera Mural Says City College Should Be Doing More</a></li>
+          <li><a href="#">Resource Centers Push Back as Their Walls Close In</a></li>
+          <li><a href="#">In the Fog of Ghosts, How to Prove You're the Real Deal</a></li>
         </ul>
       </div>
 
-      <div class="bottom">
-
-        <div class="card projects">
-          <div class="muni"></div>
-          <h2>Other Projects</h2>
-          <ul>
-            <li>In The Park — multimedia exploration of communities in Golden Gate Park</li>
-            <li>abby normal — <s>newsletter</s> blog column hosted on <a href="#">Substack</a></li>
-          </ul>
+      <!-- CONTACT -->
+      <a href="mailto:your@email.com" class="contact-link">
+        <div class="card contact">
+          <div class="ladybug"></div>
+          <h2>Contact<br>Me!</h2>
         </div>
+      </a>
 
-        <a href="mailto:your@email.com" class="contact-link">
-          <div class="card contact">
-            <div class="ladybug"></div>
-            <h2>Contact<br>Me!</h2>
-          </div>
-        </a>
-
+      <!-- AWARDS & ACCOLADES -->
+      <div class="card awards">
+        <div class="pan"></div>
+        <h2>Awards &amp; Accolades</h2>
+        <ul>
+          <li><strong>2026 CCMA Best of California Student Media</strong> — First Place — News Series</li>
+          <li><strong>2026 JACC State Publication Award</strong> — First Place — Feature Story (non profile)</li>
+          <li><strong>2026 JACC State On-the-Spot Award</strong> — First Place — Feature Writing</li>
+          <li><strong>2025 SF Press Club Award</strong> — First Place — Investigative Reporting</li>
+          <li><strong>2025 SPJ NorCal Excellence in Journalism Award</strong> — Investigative Reporting</li>
+        </ul>
       </div>
+
     </div>
 
   </div>
