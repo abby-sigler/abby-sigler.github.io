@@ -160,8 +160,8 @@ a.contact-link:hover .contact {
 .ladybug {
   position: absolute;
   pointer-events: none;
-  top: -60%; right: 10px;
-  width: 150px; height: 150px;
+  top: -30%;
+  width: 75px; height: 75px;
   background: url('images/bug.png') center/contain no-repeat;
 }
 
@@ -311,11 +311,11 @@ a.contact-link:hover .contact {
   }
 
   .ladybug {
-    width: 120px;
-    height: 120px;
+    width: 65px;
+    height: 65px;
     top: 0;
     right: 0;
-    transform: translate(20%, -50%);
+    transform: translate(-70%, -50%);
   }
 
   .projects {
@@ -383,7 +383,7 @@ a.contact-link:hover .contact {
   }
   .contact { width: 190px; }
 
-  .ladybug { width: 125px; height: 125px; }
+  .ladybug { width: 65px; height: 65px; }
 
   .projects {
     grid-row: 5;
