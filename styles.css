@@ -133,6 +133,18 @@ body {
 
 a.contact-link { text-decoration: none; display: block; transform: rotate(-1.5deg); width: fit-content; }
 
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.polaroid {
+  width: 250px;
+  display: block;
+  transform: rotate(-2deg);
+}
+
 .contact {
   width: 190px;
   min-height: 136px;
@@ -213,7 +225,7 @@ a.contact-link:hover .contact {
 .muni {
   position: absolute;
   pointer-events: none;
-  top: -50%; left: 30%;
+  top: -48%; left: 30%;
   transform: translateX(-50%);
   width: 280px; height: 280px;
   background: url('images/muni.png') center/cover;
@@ -278,8 +290,8 @@ a.contact-link:hover .contact {
   }
 
   .awards {
-    grid-column: 1;
-    grid-row: 3;
+    grid-column: 1 / -1;
+    grid-row: 4;
     width: 100%;
     max-width: 400px;
     min-height: unset;
@@ -296,8 +308,6 @@ a.contact-link:hover .contact {
   }
 
   a.contact-link {
-    grid-column: 2;
-    grid-row: 3;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -305,9 +315,25 @@ a.contact-link:hover .contact {
     transform: rotate(1.5deg);
   }
 
+  .contact-row {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    width: fit-content;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .polaroid {
+    width: 200px;
+  }
+
   .contact {
     width: 100%;
     min-height: 136px;
+    width: 260px;
+    max-width: 200px;
   }
 
   .ladybug {
@@ -320,7 +346,7 @@ a.contact-link:hover .contact {
 
   .projects {
     grid-column: 1 / -1;
-    grid-row: 4;
+    grid-row: 5;
     width: 100%;
     max-width: 400px;
     min-height: unset;
@@ -350,11 +376,11 @@ a.contact-link:hover .contact {
   /* Bio: tighter padding so text stays inside the PNG */
   .bio {
     max-width: 100%;
-    padding: 11vw 8vw 7vw 15vw;
+    padding: 18vw 8vw 7vw 15vw;
     transform: rotate(-1deg);
   }
-  .bio h1 { font-size: clamp(0.95rem, 4vw, 1.2rem); }
-  .bio p  { font-size: clamp(0.7rem, 2.9vw, 0.82rem); }
+  .bio h1 { font-size: clamp(1.2rem, 4vw, 1.2rem); }
+  .bio p  { font-size: clamp(0.8rem, 2.9vw, 0.82rem); }
   .drop   { font-size: clamp(0.9rem, 3.5vw, 1.1rem); }
 
   .writing  { max-width: 100%; padding: 40px 20px 24px; }
@@ -375,13 +401,24 @@ a.contact-link:hover .contact {
 
   /* Contact drops below awards, centered */
   a.contact-link {
-    grid-column: 1;
-    grid-row: 3;
     width: 100%;
     justify-content: center;
     transform: rotate(-1.5deg);
   }
-  .contact { width: 190px; }
+
+  .contact-row {
+    grid-column: 1;
+    grid-row: 3;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .polaroid {
+    width: 85%;
+    max-width: 320px;
+    transform: rotate(1deg);
+  }
 
   .ladybug { width: 65px; height: 65px; }
 
