@@ -395,7 +395,7 @@ a.contact-link:hover .contact {
   .muni { width: 180px; height: 180px; }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 375px) {
   .bio {
     padding: 16vw 9vw 8vw 17vw;
   }
