@@ -32,7 +32,7 @@ body {
 .bio {
   position: relative;
   background-color: transparent;
-  background-image: url('images/bio.png');
+  background-image: url('images/bio.webp');
   width: 530px;
   min-height: 765px;
   background-size: contain;
