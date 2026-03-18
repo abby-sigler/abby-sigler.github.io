@@ -27,13 +27,16 @@
         <p>I studied Cognitive Science at UC San Diego and journalism at City College. I'm originally from Seattle and came to journalism after a brief stint in tech. When I'm not reporting, you can find me at the movies or in the park. </p>
       </div>
 
-      <!-- OTHER PROJECTS -->
-      <div class="card projects">
-        <div class="muni"></div>
-        <h2>Other Projects</h2>
+      <!-- AWARDS & ACCOLADES -->
+      <div class="card awards">
+        <div class="pan"></div>
+        <h2>Awards &amp; Accolades</h2>
         <ul>
-          <li><a target="_blank" rel="noopener noreferrer" href="https://www.in-the-park.com/">In The Park</a> — multimedia exploration of communities in Golden Gate Park</li>
-          <li><a target="_blank" rel="noopener noreferrer" href="https://abbbbynormal.substack.com/">abby normal</a> — <s>newsletter</s> <s>blog</s> column hosted on Substack</li>
+          <li><strong>2026 CCMA Best of California Student Media</strong> — First Place — News Series</li>
+          <li><strong>2026 JACC State Publication Award</strong> — First Place — Feature Story (non profile)</li>
+          <li><strong>2026 JACC State On-the-Spot Award</strong> — First Place — Feature Writing</li>
+          <li><strong>2025 SF Press Club Award</strong> — First Place — Investigative Reporting</li>
+          <li><strong>2025 SPJ NorCal Excellence in Journalism Award</strong> — Investigative Reporting</li>
         </ul>
       </div>
 
@@ -66,14 +69,89 @@
         <img src="images/polaroid.png" alt="" class="polaroid">
       </div>
 
-      <!-- AWARDS & ACCOLADES -->
-      <div class="card awards">
-        <div class="pan"></div>
-        <h2>Awards &amp; Accolades</h2>
+      <!-- OTHER PROJECTS -->
+      <div class="card projects">
+        <div class="muni"></div>
+        <h2>Other Projects</h2>
         <ul>
-          <li><strong>2026 CCMA Best of California Student Media</strong> — First Place — News Series</li>
-          <li><strong>2026 JACC State Publication Award</strong> — First Place — Feature Story (non profile)</li>
-          <li><strong>2026 JACC State On-the-Spot Award</strong> — First Place — Feature Writing</li>
-          <li><strong>2025 SF Press Club Award</strong> — First Place — Investigative Reporting</li>
-          <li><strong>2025 SPJ NorCal Excellence in Journalism Award</strong> — Investigative Reporting</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://www.in-the-park.com/">In The Park</a> — multimedia exploration of communities in Golden Gate Park</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://abbbbynormal.substack.com/">abby normal</a> — <s>newsletter</s> <s>blog</s> column hosted on Substack</li>
         </ul>
+      </div>
+
+    </div>
+  </div>
+        
+<!-- STICKER SHEET -->
+<section class="sticker-sheet">
+  <div class="sticker-sheet-info">
+    <h2 class="sticker-sheet-heading">Sticker Sheet</h2>
+    <p>Here are a few of my favorite things. Click one to pick it up and stick it anywhere on the screen.</p>
+    <p><strong>Thank you for visiting my website &lt;3</strong></p>
+  </div>
+  <div class="sticker-tray">
+    <img src="images/sticker-cat.png"        class="tray-sticker" alt="cat">
+    <img src="images/sticker-mulholland.png"  class="tray-sticker" alt="Mulholland Drive">
+    <img src="images/sticker-didion.png"      class="tray-sticker" alt="Joan Didion book">
+    <img src="images/sticker-knit.png"      class="tray-sticker" alt="knit">
+    <img src="images/sticker-daftpunk.png"    class="tray-sticker" alt="Daft Punk vinyl">
+  </div>
+</section>
+<script>
+  // ── STICKER SHEET ──
+(function () {
+  let activeSrc = null;
+  let cursorEl  = null;
+  let originEl  = null;
+
+  function onMouseMove(e) {
+    if (!cursorEl) return;
+    cursorEl.style.left = e.clientX + 'px';
+    cursorEl.style.top  = e.clientY + 'px';
+  }
+
+  function pickUp(e) {
+    e.stopPropagation();
+    if (activeSrc) return;
+    originEl  = e.currentTarget;
+    activeSrc = originEl.src;
+    originEl.classList.add('picked-up');
+
+    cursorEl = document.createElement('img');
+    cursorEl.src = activeSrc;
+    cursorEl.className = 'cursor-sticker';
+    const rot = (Math.random() * 20 - 10).toFixed(1);
+    cursorEl.style.setProperty('--rot', rot + 'deg');
+    document.body.appendChild(cursorEl);
+    document.addEventListener('mousemove', onMouseMove);
+  }
+
+  function placeSticker(e) {
+    if (!activeSrc) return;
+
+    const placed = document.createElement('img');
+    placed.src = activeSrc;
+    placed.className = 'placed-sticker';
+    const rot = (Math.random() * 30 - 15).toFixed(1);
+    placed.style.left      = (e.pageX - 60) + 'px';
+    placed.style.top       = (e.pageY - 60) + 'px';
+    placed.style.transform = `rotate(${rot}deg)`;
+    placed.addEventListener('click', (e) => {
+      e.stopPropagation();
+      placed.remove();
+    });
+    document.body.appendChild(placed);
+
+    cursorEl.remove();
+    originEl.classList.remove('picked-up');
+    cursorEl = activeSrc = originEl = null;
+    document.removeEventListener('mousemove', onMouseMove);
+  }
+
+  document.querySelectorAll('.tray-sticker').forEach(el =>
+    el.addEventListener('click', pickUp)
+  );
+  document.addEventListener('click', placeSticker);
+})();
+</script>
+</body>

@@ -184,6 +184,7 @@ a.contact-link:hover .contact {
   transform: rotate(-2.5deg);
   background: #D1A3B5;
   padding: 28px 24px 28px;
+  margin-left: 80px;
 }
 .awards ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
 .awards li {
@@ -202,7 +203,7 @@ a.contact-link:hover .contact {
 }
 
 .projects {
-  margin-left: 120px;
+  margin-top: 60px;
   width: 100%;
   max-width: 400px;
   min-height: 275px;
@@ -229,6 +230,87 @@ a.contact-link:hover .contact {
   transform: translateX(-50%);
   width: 280px; height: 280px;
   background: url('images/muni.png') center/cover;
+}
+
+/* ── STICKER SHEET ── */
+.sticker-sheet {
+  max-width: 1200px;
+  margin: 80px auto 0;
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  background: #2F0D14;
+  border-radius: 6px;
+  box-shadow: inset 0 2px 18px rgba(0,0,0,0.6);
+}
+
+.sticker-sheet-info {
+  flex-shrink: 0;
+  max-width: 220px;
+}
+
+.sticker-sheet-heading {
+  font-family: 'rl-horizon', serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 2.8vw, 2rem);
+  color: #fff;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.sticker-sheet-info p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.sticker-sheet-info p strong { color: #fff; }
+
+.sticker-tray {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: nowrap;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.tray-sticker {
+  max-height: 120px;
+  width: auto;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.tray-sticker:hover {
+  transform: scale(1.08) rotate(-3deg);
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,0.55));
+}
+
+/* Floating sticker that follows the cursor */
+.cursor-sticker {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  max-height: 150px;
+  width: auto;
+  transform: translate(-50%, -50%) rotate(var(--rot, -6deg));
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6));
+  transition: none;
+}
+
+/* Placed stickers */
+.placed-sticker {
+  position: absolute;
+  pointer-events: auto;
+  z-index: 500;
+  max-height: 150px;
+  width: auto;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
 }
 
 /* ── RESPONSIVE ── */
@@ -362,6 +444,28 @@ a.contact-link:hover .contact {
     top: 0;
     transform: translate(-50%, -50%);
   }
+
+  .sticker-sheet {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 24px;
+}
+
+  .sticker-sheet-info {
+    max-width: 100%;
+  }
+
+  .sticker-tray {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    gap: 24px;
+  }
+
+  .tray-sticker {
+    max-height: 100px;
+  }
 }
 
 @media (max-width: 540px) {
@@ -430,6 +534,10 @@ a.contact-link:hover .contact {
   .projects li { font-size: clamp(0.82rem, 3.4vw, 0.95rem); }
 
   .muni { width: 180px; height: 180px; }
+  
+  .sticker-sheet {
+  display: none;
+}
 }
 
 @media (max-width: 375px) {
