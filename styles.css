@@ -124,6 +124,7 @@ body {
 
 .angel {
   position: absolute;
+  pointer-events: none;
   top: -40%; left: 40%;
   transform: translateX(-50%);
   width: 300px; height: 300px;
