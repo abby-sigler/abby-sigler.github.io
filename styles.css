@@ -378,6 +378,7 @@ a.contact-link:hover .contact {
     width: 100%;
     max-width: 400px;
     min-height: unset;
+    margin-left: 0;
     padding-top: 48px;
     transform: rotate(-1deg);
   }
@@ -433,6 +434,7 @@ a.contact-link:hover .contact {
     width: 100%;
     max-width: 400px;
     min-height: unset;
+    margin-top: 0;
     margin-left: 0;
     padding-top: 48px;
     transform: rotate(0.8deg);
@@ -447,20 +449,18 @@ a.contact-link:hover .contact {
   }
 
   .sticker-sheet {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    padding: 24px;
-}
+    gap: 32px;
+    padding: 28px 32px;
+  }
 
   .sticker-sheet-info {
-    max-width: 100%;
+    max-width: 200px;
   }
 
   .sticker-tray {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    justify-content: start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 24px;
   }
 
@@ -537,8 +537,26 @@ a.contact-link:hover .contact {
   .muni { width: 180px; height: 180px; }
   
   .sticker-sheet {
-  display: none;
-}
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 16px;
+    gap: 16px;
+  }
+
+  .sticker-sheet-info {
+    max-width: 100%;
+  }
+
+  .sticker-tray {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 16px;
+  }
+
+  .tray-sticker {
+    max-height: 80px;
+  }
 }
 
 @media (max-width: 375px) {

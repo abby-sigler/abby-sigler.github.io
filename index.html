@@ -60,7 +60,7 @@
 
       <!-- CONTACT -->
       <div class="contact-row">
-        <a href="/cdn-cgi/l/email-protection#6d0c0f0f14431e040a01081f2d0a000c0401430e0200" class="contact-link">
+        <a href="mailto:abby.sigler@gmail.com" class="contact-link">
           <div class="card contact">
             <div class="ladybug"></div>
             <h2>Contact<br>Me!</h2>
@@ -86,7 +86,7 @@
 <section class="sticker-sheet">
   <div class="sticker-sheet-info">
     <h2 class="sticker-sheet-heading">Sticker Sheet</h2>
-    <p>Here are a few of my favorite things. Click one to pick it up and stick it anywhere on the screen.</p>
+    <p>Here are a few of my favorite things. Pick one up and stick it anywhere on the screen.</p>
     <p><strong>Thank you for visiting my website &lt;3</strong></p>
   </div>
   <div class="sticker-tray">
@@ -100,9 +100,18 @@
 <script>
   // ── STICKER SHEET ──
 (function () {
-  let activeSrc = null;
-  let cursorEl  = null;
-  let originEl  = null;
+  var activeSrc = null;
+  var cursorEl  = null;
+  var originEl  = null;
+
+  var sheet = document.querySelector('.sticker-sheet');
+
+  function isOverSheet(clientX, clientY) {
+    var el = document.elementFromPoint(clientX, clientY);
+    return el && sheet.contains(el);
+  }
+
+  // ── DESKTOP: click-to-pick, click-to-place ──
 
   function onMouseMove(e) {
     if (!cursorEl) return;
@@ -120,7 +129,7 @@
     cursorEl = document.createElement('img');
     cursorEl.src = activeSrc;
     cursorEl.className = 'cursor-sticker';
-    const rot = (Math.random() * 20 - 10).toFixed(1);
+    var rot = (Math.random() * 20 - 10).toFixed(1);
     cursorEl.style.setProperty('--rot', rot + 'deg');
     document.body.appendChild(cursorEl);
     document.addEventListener('mousemove', onMouseMove);
@@ -128,19 +137,9 @@
 
   function placeSticker(e) {
     if (!activeSrc) return;
+    if (isOverSheet(e.clientX, e.clientY)) return;
 
-    const placed = document.createElement('img');
-    placed.src = activeSrc;
-    placed.className = 'placed-sticker';
-    const rot = (Math.random() * 30 - 15).toFixed(1);
-    placed.style.left      = (e.pageX - 60) + 'px';
-    placed.style.top       = (e.pageY - 60) + 'px';
-    placed.style.transform = `rotate(${rot}deg)`;
-    placed.addEventListener('click', (e) => {
-      e.stopPropagation();
-      placed.remove();
-    });
-    document.body.appendChild(placed);
+    createPlaced(activeSrc, e.pageX, e.pageY);
 
     cursorEl.remove();
     originEl.classList.remove('picked-up');
@@ -148,10 +147,101 @@
     document.removeEventListener('mousemove', onMouseMove);
   }
 
-  document.querySelectorAll('.tray-sticker').forEach(el =>
-    el.addEventListener('click', pickUp)
-  );
+  // ── TOUCH: drag-and-drop ──
+
+  var touchSrc    = null;
+  var touchGhost  = null;
+  var touchOrigin = null;
+  var touchRot    = '0';
+  var didDrag     = false;
+
+  function onTouchStart(e) {
+    if (touchSrc) return;
+    e.preventDefault();
+    var t = e.touches[0];
+
+    touchOrigin = e.currentTarget;
+    touchSrc    = touchOrigin.src;
+    touchRot    = (Math.random() * 20 - 10).toFixed(1);
+    didDrag     = false;
+    touchOrigin.classList.add('picked-up');
+
+    touchGhost = document.createElement('img');
+    touchGhost.src = touchSrc;
+    touchGhost.className = 'cursor-sticker';
+    touchGhost.style.setProperty('--rot', touchRot + 'deg');
+    touchGhost.style.left = t.clientX + 'px';
+    touchGhost.style.top  = t.clientY + 'px';
+    document.body.appendChild(touchGhost);
+
+    document.addEventListener('touchmove', onTouchMove, { passive: false });
+    document.addEventListener('touchend', onTouchEnd);
+  }
+
+  function onTouchMove(e) {
+    if (!touchGhost) return;
+    e.preventDefault();
+    didDrag = true;
+    var t = e.touches[0];
+    touchGhost.style.left = t.clientX + 'px';
+    touchGhost.style.top  = t.clientY + 'px';
+  }
+
+  function onTouchEnd(e) {
+    if (!touchSrc) return;
+    e.preventDefault();
+
+    var t = e.changedTouches[0];
+
+    if (isOverSheet(t.clientX, t.clientY)) {
+      // Cancel — put the sticker back
+      touchGhost.remove();
+      touchOrigin.classList.remove('picked-up');
+      touchGhost = touchSrc = touchOrigin = null;
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchend', onTouchEnd);
+      return;
+    }
+
+    createPlaced(touchSrc, t.pageX, t.pageY);
+
+    touchGhost.remove();
+    touchOrigin.classList.remove('picked-up');
+    touchGhost = touchSrc = touchOrigin = null;
+    document.removeEventListener('touchmove', onTouchMove);
+    document.removeEventListener('touchend', onTouchEnd);
+  }
+
+  // ── SHARED: create a placed sticker ──
+
+  function createPlaced(src, pageX, pageY) {
+    var placed = document.createElement('img');
+    placed.src = src;
+    placed.className = 'placed-sticker';
+    var rot = (Math.random() * 30 - 15).toFixed(1);
+    placed.style.left      = (pageX - 60) + 'px';
+    placed.style.top       = (pageY - 60) + 'px';
+    placed.style.transform = 'rotate(' + rot + 'deg)';
+
+    function removeSticker(ev) {
+      ev.stopPropagation();
+      ev.preventDefault();
+      placed.remove();
+    }
+    placed.addEventListener('click', removeSticker);
+    placed.addEventListener('touchend', removeSticker);
+
+    document.body.appendChild(placed);
+  }
+
+  // ── BIND ──
+
+  document.querySelectorAll('.tray-sticker').forEach(function (el) {
+    el.addEventListener('click', pickUp);
+    el.addEventListener('touchstart', onTouchStart, { passive: false });
+  });
   document.addEventListener('click', placeSticker);
 })();
 </script>
 </body>
+</html>
